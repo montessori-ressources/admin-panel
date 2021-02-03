@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "BROWSER=none PORT=3333 react-scripts start",
-    "deploy": "gh-pages -d build",
+    "deploy": "react-scripts build && firebase deploy",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
