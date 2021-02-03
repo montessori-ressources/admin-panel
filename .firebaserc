@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "montessori-web"
+  },
+  "targets": {
+    "montessori-web": {
+      "hosting": {
+        "admin": [
+          "montessori-admin"
+        ]
+      }
+    }
+  }
+}
