@@ -30,6 +30,8 @@ import {
   ArrayField,
   ChipField,
   Labeled,
+  BooleanInput,
+  BooleanField,
 } from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 
@@ -42,6 +44,7 @@ export const DocumentList = (props) => (
   <List {...props}>
     <Datagrid>
       <TextField source="title" />
+      <BooleanField source="validated" />
       <SelectField source="type" choices={choices} />
       <ReferenceField
         label="Category"
@@ -129,6 +132,7 @@ export const DocumentEdit = (props) => (
 const EditCreate = () => (
   <>
     <TextInput source="title" helperText="Name of the document" fullWidth />
+    <BooleanInput source="validated" helperText="Visible ?" fullWidth />
     <TextInput
       source="author"
       helperText="Provide author name for credit"
