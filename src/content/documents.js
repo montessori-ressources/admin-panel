@@ -40,12 +40,18 @@ const choices = [
   { id: "nomenclature", name: "Nomenclature" },
 ];
 
+const nomenclatures = [
+  { id: 1, name: "Type 1 (object association)" },
+  { id: 2, name: "Type 2 (image association)" },
+];
+
 export const DocumentList = (props) => (
   <List {...props}>
     <Datagrid>
       <TextField source="title" />
       <BooleanField source="validated" />
       <SelectField source="type" choices={choices} />
+      <SelectField source="nomenclature_type" choices={nomenclatures} />
       <ReferenceField
         label="Category"
         source="category_id"
@@ -169,20 +175,28 @@ const EditCreate = () => (
     <FormDataConsumer>
       {({ formData, ...rest }) =>
         formData.type === "nomenclature" && (
-          <ArrayInput source="cards">
-            <SimpleFormIterator>
-              <TextInput label="Label" source="name" />
-              <FileInput
-                source="file"
-                label="File"
-                accept="image/*"
-                helperText="Provide one image per card"
-                {...rest}
-              >
-                <ImageField source="src" title="title" />
-              </FileInput>
-            </SimpleFormIterator>
-          </ArrayInput>
+          <>
+            <SelectInput
+              fullWidth
+              source="nomenclature_type"
+              choices={nomenclatures}
+              helperText="Choose the nomenclature type"
+            />
+            <ArrayInput source="cards">
+              <SimpleFormIterator>
+                <TextInput label="Label" source="name" />
+                <FileInput
+                  source="file"
+                  label="File"
+                  accept="image/*"
+                  helperText="Provide one image per card"
+                  {...rest}
+                >
+                  <ImageField source="src" title="title" />
+                </FileInput>
+              </SimpleFormIterator>
+            </ArrayInput>
+          </>
         )
       }
     </FormDataConsumer>
