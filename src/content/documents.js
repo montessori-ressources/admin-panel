@@ -32,6 +32,7 @@ import {
   Labeled,
   BooleanInput,
   BooleanField,
+  required,
 } from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 
@@ -49,6 +50,7 @@ export const DocumentList = (props) => (
   <List {...props}>
     <Datagrid>
       <TextField source="title" />
+      <TextField source="slug" />
       <BooleanField source="validated" />
       <SelectField source="type" choices={choices} />
       <SelectField source="nomenclature_type" choices={nomenclatures} />
@@ -100,6 +102,7 @@ export const DocumentShow = (props) => (
         <TextField source="title" />
       </ReferenceField>
       <TextField source="title" />
+      <TextField source="slug" />
       <RichTextField source="description" />
       <DateField source="createdate" options={{ disabled: true }} />
       <ConditionalFileField />
@@ -137,12 +140,25 @@ export const DocumentEdit = (props) => (
 
 const EditCreate = () => (
   <>
-    <TextInput source="title" helperText="Name of the document" fullWidth />
+    <TextInput
+      source="title"
+      helperText="Name of the document"
+      fullWidth
+      validate={[required()]}
+    />
+    <TextInput
+      source="slug"
+      helperText="Url of the document. Must be unique."
+      fullWidth
+      validate={[required()]}
+    />
+
     <BooleanInput source="validated" helperText="Visible ?" fullWidth />
     <TextInput
       source="author"
       helperText="Provide author name for credit"
       fullWidth
+      validate={[required()]}
     />
     <ReferenceInput
       fullWidth

@@ -20,6 +20,7 @@ import {
   DeleteButton,
   RichTextField,
   SelectInput,
+  required,
 } from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 
@@ -27,6 +28,7 @@ export const CategoryList = (props) => (
   <List {...props}>
     <Datagrid>
       <TextField source="title" />
+      <TextField source="slug" />
       <ReferenceField
         label="Parent Category"
         source="parent_id"
@@ -53,6 +55,7 @@ export const CategoryShow = (props) => (
         <TextField source="title" />
       </ReferenceField>
       <TextField source="title" />
+      <TextField source="slug" />
       <RichTextField source="description" />
       <DateField source="createdate" options={{ disabled: true }} />
       <DateField source="lastupdate" options={{ disabled: true }} />
@@ -63,7 +66,8 @@ export const CategoryShow = (props) => (
 export const CategoryCreate = (props) => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source="title" />
+      <TextInput source="title" validate={[required()]} />
+      <TextInput source="slug" validate={[required()]} />
       <ReferenceInput
         label="Parent Category"
         source="parent_id"
@@ -86,7 +90,8 @@ export const CategoryEdit = (props) => (
       <TextInput source="id" options={{ disabled: true }} />
       <DateInput source="createdate" options={{ disabled: true }} />
       <DateInput source="lastupdate" options={{ disabled: true }} />
-      <TextInput source="title" />
+      <TextInput source="title" validate={[required()]} />
+      <TextInput source="slug" validate={[required()]} />
       <ReferenceInput
         label="Parent Category"
         source="parent_id"
